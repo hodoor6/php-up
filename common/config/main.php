@@ -9,5 +9,8 @@ return [
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
+        'stringHelper' => [
+            'class'=>'common\components\StringHelper'
+        ],
     ],
 ];
