@@ -6,9 +6,26 @@ namespace frontend\controllers;
 use Yii;
 use yii\web\Controller;
 use frontend\models\Test;
+use frontend\models\example\ExampleValidation;
 
 class TestController extends Controller
 {
+
+    public function actionValidation()
+    {
+        $model = new ExampleValidation();
+        $formData = Yii::$app->request->post();
+
+        if (Yii::$app->request->isPost) {
+            $model->attributes = $formData;
+            if ($model->validate() && $model->save()) {
+
+                Yii::$app->session->setFlash('info', 'Data updated');
+            }
+        }
+        return $this->render('validation', ['model' => $model]);
+    }
+
 
     public function actionSay($message = 'Привет')
     {
@@ -52,5 +69,4 @@ class TestController extends Controller
             'item' =>$item
         ]);
     }
-
 }
